@@ -1,54 +1,52 @@
 # Agent Relay
 
-Install the workflow into the current project with the simplest available entrypoint.
+`agent-relay` is a workflow kit for **Codex Windows Desktop**.
 
-## Local checkout
+It lets a **main thread** launch **child agents in Codex CLI windows** so work can run in parallel. The main thread can then read each child agent's **status**, **handoff**, and **result**, and decide whether to continue some threads or summarize everything for the user.
 
-If you cloned this repo locally:
+What it does:
 
-```powershell
-powershell -ExecutionPolicy Bypass -File .\install.ps1 -ProjectRoot .
-```
+- main thread delegates work to child agents
+- child agents work in real CLI windows
+- shared files track progress and results
+- main thread reads those files and makes the next decision
 
-Or on Bash:
+## Install
 
-```bash
-bash ./install.sh --project-root .
-```
-
-## GitHub one-liner
-
-If this repo is public on GitHub, the Bash path can be a single line:
+Bash:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/enderzcx/codex-desktop-agent-relay/main/install.sh | bash
 ```
 
-PowerShell can do the same in one line:
+PowerShell:
 
 ```powershell
 $script = irm https://raw.githubusercontent.com/enderzcx/codex-desktop-agent-relay/main/install.ps1; & ([scriptblock]::Create($script))
 ```
 
-The installers still accept overrides if you ever want to test another branch or mirror.
+If you already cloned this repo locally:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\install.ps1 -ProjectRoot .
+```
 
 ## What gets installed
 
-- `spawn-agents.ps1`
-- `update-agent-status.ps1`
-- `sync-agent-status.ps1`
-- `build-agent-report.ps1`
-- `await-agent-results.ps1`
-- `cleanup-agent-worktrees.ps1`
-- `START_HERE.md`
-- `MULTI_AGENT_WORKFLOW.md`
-- `MAIN_AGENT_RUNBOOK.md`
-- `.codex-agents/README.md`
-- `.codex-agents/tasks/TASK_TEMPLATE.md`
-- `.codex-agents/handoffs/HANDOFF_TEMPLATE.md`
-- `.codex-agents/status/README.md`
-- `.codex-agents/reports/README.md`
+- worker launcher scripts
+- main-thread sync and report scripts
+- optional worktree cleanup
+- `.codex-agents/` shared state files
+- workflow docs and templates
 
-## Advanced path
+## Use this when
 
-If users want the reusable Codex skill itself, the packaged skill lives at [skill-packages/agent-relay/SKILL.md](/G:/ICO/skill-packages/agent-relay/SKILL.md).
+- one Codex Desktop thread is not enough
+- you want child agents to run in parallel
+- you want the main thread to collect their states and results
+- you want the main thread to decide what happens next
+
+## More
+
+- Reusable skill package: [skill-packages/agent-relay/SKILL.md](/G:/ICO/skill-packages/agent-relay/SKILL.md)
+- Packaged installer docs: [skill-packages/agent-relay/README.md](/G:/ICO/skill-packages/agent-relay/README.md)

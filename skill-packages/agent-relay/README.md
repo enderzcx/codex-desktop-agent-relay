@@ -1,6 +1,13 @@
 # Agent Relay Skill Package
 
-This folder packages the repo-level multi-agent workflow into a reusable skill kit.
+This package turns the workflow into a reusable Codex skill for **Codex Windows Desktop**.
+
+It is for the pattern where:
+
+- a main thread launches child agents in Codex CLI windows
+- child agents work in parallel
+- the main thread reads their status files and handoffs
+- the main thread decides whether to continue threads or summarize results
 
 ## Install into another repo
 
