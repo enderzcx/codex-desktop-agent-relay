@@ -1,6 +1,6 @@
 ---
 name: agent-relay
-description: Run a stable main-agent and worker-agent workflow with shared board files, real Codex CLI worker windows, status sync, waiting, and controller reports. Use when one main thread should delegate to 2-5 narrow workers and make decisions only after workers finish or block.
+description: Run a simple main-agent and worker-agent workflow with shared board files, real Codex CLI worker windows, status sync, a low-token watcher, and controller reports. Use when one main thread should delegate to 2-5 narrow workers and make decisions only after workers finish, block, or ask for review.
 ---
 
 # Agent Relay
@@ -46,21 +46,29 @@ If you want to overwrite an older installed copy of the toolkit files, add `-For
 
 1. Read `START_HERE.md`.
 
-2. Generate worker tasks:
+2. Prefer the one-command entrypoint:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\spawn-agents.ps1 -Goal "Replace with the real goal" -NoOpenWindows
+powershell -ExecutionPolicy Bypass -File .\start-agent-relay.ps1 -Goal "Replace with the real goal"
 ```
 
-3. Replace placeholder task context with the real files, flows, interfaces, or questions.
+This prepares worker files, opens worker windows, and runs the watcher until the controller should wake up.
 
-4. Launch workers:
+3. If you want to edit tasks before opening windows:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\start-agent-relay.ps1 -Goal "Replace with the real goal" -PrepareOnly
+```
+
+4. Replace placeholder task context with the real files, flows, interfaces, or questions.
+
+5. Launch workers manually when needed:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\spawn-agents.ps1 -Goal "Replace with the real goal"
 ```
 
-5. Prefer the low-token watcher:
+6. Prefer the low-token watcher when you do not use the one-command entrypoint:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\watch-agent-results.ps1
@@ -74,13 +82,13 @@ This wakes the controller only when:
 
 It also writes `.codex-agents/reports/controller-trigger.json` and refreshes the controller report.
 
-6. If you specifically want the controller shell to block until all workers leave active states:
+7. If you specifically want the controller shell to block until all workers leave active states:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\await-agent-results.ps1
 ```
 
-7. Read the generated report and decide:
+8. Read the generated report and decide:
 
 - continue only the workers that need follow-up
 - or summarize the completed handoffs for the user
@@ -109,6 +117,7 @@ powershell -ExecutionPolicy Bypass -File .\cleanup-agent-worktrees.ps1
 
 ## Files Installed By This Skill
 
+- `start-agent-relay.ps1`
 - `spawn-agents.ps1`
 - `update-agent-status.ps1`
 - `sync-agent-status.ps1`

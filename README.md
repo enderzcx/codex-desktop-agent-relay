@@ -32,8 +32,19 @@ If you already cloned this repo locally:
 powershell -ExecutionPolicy Bypass -File .\install.ps1 -ProjectRoot .
 ```
 
+## Quick Start
+
+After installation, the simplest entrypoint is:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\start-agent-relay.ps1 -Goal "Replace with the real goal"
+```
+
+This prepares worker files, opens child agent CLI windows by default, and runs the low-token watcher until the controller should wake up.
+
 ## What gets installed
 
+- one-command starter script
 - worker launcher scripts
 - main-thread sync and report scripts
 - low-token controller watcher script

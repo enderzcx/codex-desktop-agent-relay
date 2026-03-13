@@ -108,6 +108,7 @@ FILES=(
   "build-agent-report.ps1:build-agent-report.ps1"
   "cleanup-agent-worktrees.ps1:cleanup-agent-worktrees.ps1"
   "spawn-agents.ps1:spawn-agents.ps1"
+  "start-agent-relay.ps1:start-agent-relay.ps1"
   "START_HERE.md:START_HERE.md"
   "sync-agent-status.ps1:sync-agent-status.ps1"
   "update-agent-status.ps1:update-agent-status.ps1"

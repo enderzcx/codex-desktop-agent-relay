@@ -45,6 +45,7 @@ $files = @(
     @{ source = "build-agent-report.ps1"; destination = "build-agent-report.ps1" },
     @{ source = "cleanup-agent-worktrees.ps1"; destination = "cleanup-agent-worktrees.ps1" },
     @{ source = "spawn-agents.ps1"; destination = "spawn-agents.ps1" },
+    @{ source = "start-agent-relay.ps1"; destination = "start-agent-relay.ps1" },
     @{ source = "START_HERE.md"; destination = "START_HERE.md" },
     @{ source = "sync-agent-status.ps1"; destination = "sync-agent-status.ps1" },
     @{ source = "update-agent-status.ps1"; destination = "update-agent-status.ps1" },
