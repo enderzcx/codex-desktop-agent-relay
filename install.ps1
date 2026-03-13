@@ -19,38 +19,17 @@ $scriptPath = $MyInvocation.MyCommand.Path
 $localPayload = $null
 if ($scriptPath) {
     $scriptRoot = Split-Path -Parent $scriptPath
-    $candidate = Join-Path $scriptRoot "skill-packages\agent-relay\payload"
+    $candidate = Join-Path $scriptRoot "agent-relay\payload"
     if (Test-Path -LiteralPath $candidate) {
         $localPayload = (Resolve-Path -LiteralPath $candidate).Path
     }
-}
-
-function Get-RepoFromOrigin {
-    param([string]$Path)
-
-    try {
-        $origin = git -C $Path config --get remote.origin.url 2>$null
-        if ($LASTEXITCODE -ne 0 -or -not $origin) {
-            return $null
-        }
-        if ($origin -match '^https://github\.com/([^/]+/[^/.]+?)(?:\.git)?$') {
-            return $Matches[1]
-        }
-        if ($origin -match '^git@github\.com:([^/]+/[^.]+?)(?:\.git)?$') {
-            return $Matches[1]
-        }
-    } catch {
-        return $null
-    }
-
-    return $null
 }
 
 if (-not $BaseUrl -and -not $localPayload) {
     if (-not $Repo) {
         throw "Could not determine a GitHub repo. Pass -Repo owner/repo or -BaseUrl."
     }
-    $BaseUrl = "https://raw.githubusercontent.com/$Repo/$Ref/skill-packages/agent-relay/payload"
+    $BaseUrl = "https://raw.githubusercontent.com/$Repo/$Ref/agent-relay/payload"
 }
 
 $files = @(

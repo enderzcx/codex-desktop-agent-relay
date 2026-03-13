@@ -34,7 +34,7 @@ Do not use this skill when:
 From the target workspace, run:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File "G:\ICO\skill-packages\agent-relay\scripts\install-workflow.ps1" -ProjectRoot .
+powershell -ExecutionPolicy Bypass -File "G:\ICO\agent-relay\scripts\install-workflow.ps1" -ProjectRoot .
 ```
 
 This copies the packaged workflow files into the current repo without touching an existing `AGENTS.md`.

@@ -91,30 +91,16 @@ if [[ -n "${BASH_SOURCE[0]:-}" && -f "${BASH_SOURCE[0]}" ]]; then
 fi
 
 LOCAL_PAYLOAD=""
-if [[ -n "$SCRIPT_DIR" && -d "$SCRIPT_DIR/skill-packages/agent-relay/payload" ]]; then
-  LOCAL_PAYLOAD="$SCRIPT_DIR/skill-packages/agent-relay/payload"
+if [[ -n "$SCRIPT_DIR" && -d "$SCRIPT_DIR/agent-relay/payload" ]]; then
+  LOCAL_PAYLOAD="$SCRIPT_DIR/agent-relay/payload"
 fi
-
-infer_repo_from_git() {
-  local origin
-  origin="$(git -C "$PROJECT_ROOT" config --get remote.origin.url 2>/dev/null || true)"
-  if [[ "$origin" =~ ^https://github\.com/([^/]+/[^/.]+)(\.git)?$ ]]; then
-    echo "${BASH_REMATCH[1]}"
-    return 0
-  fi
-  if [[ "$origin" =~ ^git@github\.com:([^/]+/[^.]+)(\.git)?$ ]]; then
-    echo "${BASH_REMATCH[1]}"
-    return 0
-  fi
-  return 1
-}
 
 if [[ -z "$BASE_URL" && -z "$LOCAL_PAYLOAD" ]]; then
   if [[ -z "$REPO" ]]; then
     echo "Could not determine a GitHub repo. Pass --repo owner/repo or --base-url." >&2
     exit 1
   fi
-  BASE_URL="https://raw.githubusercontent.com/$REPO/$REF/skill-packages/agent-relay/payload"
+  BASE_URL="https://raw.githubusercontent.com/$REPO/$REF/agent-relay/payload"
 fi
 
 FILES=(
