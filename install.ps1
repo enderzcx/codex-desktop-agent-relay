@@ -19,7 +19,7 @@ $scriptPath = $MyInvocation.MyCommand.Path
 $localPayload = $null
 if ($scriptPath) {
     $scriptRoot = Split-Path -Parent $scriptPath
-    $candidate = Join-Path $scriptRoot "agent-relay\payload"
+    $candidate = Join-Path $scriptRoot "agent-relay\workflow"
     if (Test-Path -LiteralPath $candidate) {
         $localPayload = (Resolve-Path -LiteralPath $candidate).Path
     }
@@ -29,7 +29,7 @@ if (-not $BaseUrl -and -not $localPayload) {
     if (-not $Repo) {
         throw "Could not determine a GitHub repo. Pass -Repo owner/repo or -BaseUrl."
     }
-    $BaseUrl = "https://raw.githubusercontent.com/$Repo/$Ref/agent-relay/payload"
+    $BaseUrl = "https://raw.githubusercontent.com/$Repo/$Ref/agent-relay/workflow"
 }
 
 $files = @(

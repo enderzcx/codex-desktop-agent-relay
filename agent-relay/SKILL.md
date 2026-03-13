@@ -34,7 +34,7 @@ Do not use this skill when:
 From the target workspace, run:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File "G:\ICO\agent-relay\scripts\install-workflow.ps1" -ProjectRoot .
+powershell -ExecutionPolicy Bypass -File "G:\ICO\agent-relay\install-workflow.ps1" -ProjectRoot .
 ```
 
 This copies the packaged workflow files into the current repo without touching an existing `AGENTS.md`.
@@ -115,5 +115,5 @@ powershell -ExecutionPolicy Bypass -File .\cleanup-agent-worktrees.ps1
 
 ## Notes
 
-- The packaged files live under this skill's `payload/` directory.
+- The packaged files live under this skill's `workflow/` directory.
 - A merge snippet for repository `AGENTS.md` is provided in `AGENTS_SNIPPET.md`.

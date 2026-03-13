@@ -12,7 +12,7 @@ It is for the pattern where:
 ## Install into another repo
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File "G:\ICO\agent-relay\scripts\install-workflow.ps1" -ProjectRoot "D:\path\to\repo"
+powershell -ExecutionPolicy Bypass -File "G:\ICO\agent-relay\install-workflow.ps1" -ProjectRoot "D:\path\to\repo"
 ```
 
 Add `-Force` to overwrite previously installed toolkit files.
@@ -21,5 +21,5 @@ Add `-Force` to overwrite previously installed toolkit files.
 
 - `SKILL.md`: skill instructions
 - `AGENTS_SNIPPET.md`: text to merge into a target repo `AGENTS.md`
-- `payload/`: files copied into the target repo
-- `scripts/install-workflow.ps1`: installer
+- `workflow/`: files copied into the target repo
+- `install-workflow.ps1`: installer

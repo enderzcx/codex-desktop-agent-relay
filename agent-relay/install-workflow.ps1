@@ -8,8 +8,8 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
 $scriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
-$packageRoot = Split-Path -Parent $scriptRoot
-$payloadRoot = Join-Path $packageRoot "payload"
+$packageRoot = $scriptRoot
+$payloadRoot = Join-Path $packageRoot "workflow"
 if (-not (Test-Path -LiteralPath $ProjectRoot)) {
     $null = New-Item -ItemType Directory -Path $ProjectRoot -Force
 }
