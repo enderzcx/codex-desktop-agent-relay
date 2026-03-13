@@ -43,11 +43,7 @@ If you want to overwrite an older installed copy of the toolkit files, add `-For
 
 ## Core Flow
 
-1. Read the generated workflow docs:
-
-- `START_HERE.md`
-- `MULTI_AGENT_WORKFLOW.md`
-- `MAIN_AGENT_RUNBOOK.md`
+1. Read `START_HERE.md`.
 
 2. Generate worker tasks:
 
@@ -105,15 +101,10 @@ powershell -ExecutionPolicy Bypass -File .\cleanup-agent-worktrees.ps1
 - `await-agent-results.ps1`
 - `cleanup-agent-worktrees.ps1`
 - `START_HERE.md`
-- `MULTI_AGENT_WORKFLOW.md`
-- `MAIN_AGENT_RUNBOOK.md`
 - `.codex-agents/README.md`
 - `.codex-agents/tasks/TASK_TEMPLATE.md`
 - `.codex-agents/handoffs/HANDOFF_TEMPLATE.md`
-- `.codex-agents/status/README.md`
-- `.codex-agents/reports/README.md`
 
 ## Notes
 
 - The packaged files live under this skill's `workflow/` directory.
-- A merge snippet for repository `AGENTS.md` is provided in `AGENTS_SNIPPET.md`.

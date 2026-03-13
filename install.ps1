@@ -36,16 +36,12 @@ $files = @(
     "await-agent-results.ps1",
     "build-agent-report.ps1",
     "cleanup-agent-worktrees.ps1",
-    "MAIN_AGENT_RUNBOOK.md",
-    "MULTI_AGENT_WORKFLOW.md",
     "spawn-agents.ps1",
     "START_HERE.md",
     "sync-agent-status.ps1",
     "update-agent-status.ps1",
     ".codex-agents/README.md",
     ".codex-agents/handoffs/HANDOFF_TEMPLATE.md",
-    ".codex-agents/reports/README.md",
-    ".codex-agents/status/README.md",
     ".codex-agents/tasks/TASK_TEMPLATE.md"
 )
 

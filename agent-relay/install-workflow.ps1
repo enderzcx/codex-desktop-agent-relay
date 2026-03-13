@@ -49,5 +49,3 @@ foreach ($file in $payloadFiles) {
 
 Write-Host ""
 Write-Host "Agent relay workflow installed into $targetRoot" -ForegroundColor Cyan
-Write-Host "Optional next step: merge this snippet into AGENTS.md if the repo has one:" -ForegroundColor Cyan
-Write-Host (Join-Path $packageRoot "AGENTS_SNIPPET.md") -ForegroundColor Yellow

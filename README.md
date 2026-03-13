@@ -49,4 +49,3 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1 -ProjectRoot .
 ## More
 
 - Reusable skill package: [agent-relay/SKILL.md](/G:/ICO/agent-relay/SKILL.md)
-- Packaged installer docs: [agent-relay/README.md](/G:/ICO/agent-relay/README.md)
