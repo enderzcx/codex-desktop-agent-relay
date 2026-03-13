@@ -9,6 +9,7 @@ What it does:
 - main thread delegates work to child agents
 - child agents work in real CLI windows
 - shared files track progress and results
+- a lightweight watcher can wait for a decision point without burning main-thread tokens
 - main thread reads those files and makes the next decision
 
 ## Install
@@ -35,6 +36,7 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1 -ProjectRoot .
 
 - worker launcher scripts
 - main-thread sync and report scripts
+- low-token controller watcher script
 - optional worktree cleanup
 - `.codex-agents/` shared state files
 - workflow docs and templates

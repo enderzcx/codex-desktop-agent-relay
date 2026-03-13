@@ -111,6 +111,7 @@ FILES=(
   "START_HERE.md:START_HERE.md"
   "sync-agent-status.ps1:sync-agent-status.ps1"
   "update-agent-status.ps1:update-agent-status.ps1"
+  "watch-agent-results.ps1:watch-agent-results.ps1"
   "HANDOFF_TEMPLATE.md:.codex-agents/handoffs/HANDOFF_TEMPLATE.md"
   "TASK_TEMPLATE.md:.codex-agents/tasks/TASK_TEMPLATE.md"
 )

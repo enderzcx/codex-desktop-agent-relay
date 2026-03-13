@@ -12,7 +12,8 @@ This skill packages a conservative workflow:
 - one main thread owns decomposition, routing, and decisions
 - each worker gets one narrow brief
 - workers write only to their own status and handoff files
-- the main thread waits for workers to finish, then decides whether to continue any thread or summarize for the user
+- a local watcher can wait for decision points without keeping the main thread alive
+- the main thread wakes only when workers finish, block, or ask for review
 
 ## When To Use It
 
@@ -59,13 +60,27 @@ powershell -ExecutionPolicy Bypass -File .\spawn-agents.ps1 -Goal "Replace with 
 powershell -ExecutionPolicy Bypass -File .\spawn-agents.ps1 -Goal "Replace with the real goal"
 ```
 
-5. Let the controller wait for all workers to reach a handoff state:
+5. Prefer the low-token watcher:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\watch-agent-results.ps1
+```
+
+This wakes the controller only when:
+
+- any worker becomes `blocked`
+- any worker becomes `needs_review`
+- all workers reach terminal states
+
+It also writes `.codex-agents/reports/controller-trigger.json` and refreshes the controller report.
+
+6. If you specifically want the controller shell to block until all workers leave active states:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\await-agent-results.ps1
 ```
 
-6. Read the generated report and decide:
+7. Read the generated report and decide:
 
 - continue only the workers that need follow-up
 - or summarize the completed handoffs for the user
@@ -98,6 +113,7 @@ powershell -ExecutionPolicy Bypass -File .\cleanup-agent-worktrees.ps1
 - `update-agent-status.ps1`
 - `sync-agent-status.ps1`
 - `build-agent-report.ps1`
+- `watch-agent-results.ps1`
 - `await-agent-results.ps1`
 - `cleanup-agent-worktrees.ps1`
 - `START_HERE.md`

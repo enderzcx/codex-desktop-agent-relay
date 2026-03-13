@@ -433,9 +433,7 @@ foreach ($definition in $taskDefinitions) {
     }
     ($statusPayload | ConvertTo-Json -Depth 5) | Set-Content -LiteralPath $statusFilePath -Encoding utf8
 
-    if (-not (Test-Path -LiteralPath $handoffFilePath)) {
-        Set-Content -LiteralPath $handoffFilePath -Value (New-HandoffContent -Role $definition.Role) -Encoding utf8
-    }
+    Set-Content -LiteralPath $handoffFilePath -Value (New-HandoffContent -Role $definition.Role) -Encoding utf8
 
     $tasks += [ordered]@{
         id = $definition.TaskId

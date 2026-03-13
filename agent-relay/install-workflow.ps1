@@ -48,6 +48,7 @@ $files = @(
     @{ source = "START_HERE.md"; destination = "START_HERE.md" },
     @{ source = "sync-agent-status.ps1"; destination = "sync-agent-status.ps1" },
     @{ source = "update-agent-status.ps1"; destination = "update-agent-status.ps1" },
+    @{ source = "watch-agent-results.ps1"; destination = "watch-agent-results.ps1" },
     @{ source = "HANDOFF_TEMPLATE.md"; destination = ".codex-agents/handoffs/HANDOFF_TEMPLATE.md" },
     @{ source = "TASK_TEMPLATE.md"; destination = ".codex-agents/tasks/TASK_TEMPLATE.md" }
 )

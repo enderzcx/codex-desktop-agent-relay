@@ -23,7 +23,15 @@ powershell -ExecutionPolicy Bypass -File .\spawn-agents.ps1 -Goal "Replace with 
 
 Worktree mode requires the repo to already have a first commit.
 
-4. As workers progress:
+4. For the lowest-token controller flow, let a local watcher wait for a decision point:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\watch-agent-results.ps1
+```
+
+This waits until any worker is `blocked`, any worker is `needs_review`, or all workers have reached terminal states. It then syncs status, builds the report, and writes `.codex-agents/reports/controller-trigger.json`.
+
+If you prefer manual polling as workers progress:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\sync-agent-status.ps1
