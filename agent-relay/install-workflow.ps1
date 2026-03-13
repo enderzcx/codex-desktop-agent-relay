@@ -40,11 +40,22 @@ function Copy-PayloadFile {
     Write-Host "Installed: $DestinationPath" -ForegroundColor Green
 }
 
-$payloadFiles = Get-ChildItem -LiteralPath $payloadRoot -Recurse -File
-foreach ($file in $payloadFiles) {
-    $relativePath = $file.FullName.Substring($payloadRoot.Length).TrimStart('\')
-    $destination = Join-Path $targetRoot $relativePath
-    Copy-PayloadFile -SourcePath $file.FullName -DestinationPath $destination -Overwrite:$Force
+$files = @(
+    @{ source = "await-agent-results.ps1"; destination = "await-agent-results.ps1" },
+    @{ source = "build-agent-report.ps1"; destination = "build-agent-report.ps1" },
+    @{ source = "cleanup-agent-worktrees.ps1"; destination = "cleanup-agent-worktrees.ps1" },
+    @{ source = "spawn-agents.ps1"; destination = "spawn-agents.ps1" },
+    @{ source = "START_HERE.md"; destination = "START_HERE.md" },
+    @{ source = "sync-agent-status.ps1"; destination = "sync-agent-status.ps1" },
+    @{ source = "update-agent-status.ps1"; destination = "update-agent-status.ps1" },
+    @{ source = "HANDOFF_TEMPLATE.md"; destination = ".codex-agents/handoffs/HANDOFF_TEMPLATE.md" },
+    @{ source = "TASK_TEMPLATE.md"; destination = ".codex-agents/tasks/TASK_TEMPLATE.md" }
+)
+
+foreach ($file in $files) {
+    $source = Join-Path $payloadRoot $file.source
+    $destination = Join-Path $targetRoot $file.destination
+    Copy-PayloadFile -SourcePath $source -DestinationPath $destination -Overwrite:$Force
 }
 
 Write-Host ""

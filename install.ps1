@@ -33,19 +33,19 @@ if (-not $BaseUrl -and -not $localPayload) {
 }
 
 $files = @(
-    "await-agent-results.ps1",
-    "build-agent-report.ps1",
-    "cleanup-agent-worktrees.ps1",
-    "spawn-agents.ps1",
-    "START_HERE.md",
-    "sync-agent-status.ps1",
-    "update-agent-status.ps1",
-    ".codex-agents/handoffs/HANDOFF_TEMPLATE.md",
-    ".codex-agents/tasks/TASK_TEMPLATE.md"
+    @{ source = "await-agent-results.ps1"; destination = "await-agent-results.ps1" },
+    @{ source = "build-agent-report.ps1"; destination = "build-agent-report.ps1" },
+    @{ source = "cleanup-agent-worktrees.ps1"; destination = "cleanup-agent-worktrees.ps1" },
+    @{ source = "spawn-agents.ps1"; destination = "spawn-agents.ps1" },
+    @{ source = "START_HERE.md"; destination = "START_HERE.md" },
+    @{ source = "sync-agent-status.ps1"; destination = "sync-agent-status.ps1" },
+    @{ source = "update-agent-status.ps1"; destination = "update-agent-status.ps1" },
+    @{ source = "HANDOFF_TEMPLATE.md"; destination = ".codex-agents/handoffs/HANDOFF_TEMPLATE.md" },
+    @{ source = "TASK_TEMPLATE.md"; destination = ".codex-agents/tasks/TASK_TEMPLATE.md" }
 )
 
-foreach ($relativePath in $files) {
-    $destination = Join-Path $targetRoot $relativePath
+foreach ($file in $files) {
+    $destination = Join-Path $targetRoot $file.destination
     $parent = Split-Path -Parent $destination
     if ($parent -and -not (Test-Path -LiteralPath $parent)) {
         $null = New-Item -ItemType Directory -Path $parent -Force
@@ -57,10 +57,10 @@ foreach ($relativePath in $files) {
     }
 
     if ($localPayload) {
-        $source = Join-Path $localPayload $relativePath
+        $source = Join-Path $localPayload $file.source
         Copy-Item -LiteralPath $source -Destination $destination -Force
     } else {
-        $url = ($BaseUrl.TrimEnd('/') + "/" + ($relativePath -replace '\\', '/'))
+        $url = ($BaseUrl.TrimEnd('/') + "/" + ($file.source -replace '\\', '/'))
         Invoke-WebRequest -Uri $url -OutFile $destination
     }
     Write-Host "Installed: $destination" -ForegroundColor Green

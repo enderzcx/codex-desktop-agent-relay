@@ -104,18 +104,20 @@ if [[ -z "$BASE_URL" && -z "$LOCAL_PAYLOAD" ]]; then
 fi
 
 FILES=(
-  "await-agent-results.ps1"
-  "build-agent-report.ps1"
-  "cleanup-agent-worktrees.ps1"
-  "spawn-agents.ps1"
-  "START_HERE.md"
-  "sync-agent-status.ps1"
-  "update-agent-status.ps1"
-  ".codex-agents/handoffs/HANDOFF_TEMPLATE.md"
-  ".codex-agents/tasks/TASK_TEMPLATE.md"
+  "await-agent-results.ps1:await-agent-results.ps1"
+  "build-agent-report.ps1:build-agent-report.ps1"
+  "cleanup-agent-worktrees.ps1:cleanup-agent-worktrees.ps1"
+  "spawn-agents.ps1:spawn-agents.ps1"
+  "START_HERE.md:START_HERE.md"
+  "sync-agent-status.ps1:sync-agent-status.ps1"
+  "update-agent-status.ps1:update-agent-status.ps1"
+  "HANDOFF_TEMPLATE.md:.codex-agents/handoffs/HANDOFF_TEMPLATE.md"
+  "TASK_TEMPLATE.md:.codex-agents/tasks/TASK_TEMPLATE.md"
 )
 
-for rel in "${FILES[@]}"; do
+for mapping in "${FILES[@]}"; do
+  src="${mapping%%:*}"
+  rel="${mapping#*:}"
   dst="$PROJECT_ROOT/$rel"
   mkdir -p "$(dirname "$dst")"
   if [[ -f "$dst" && "$FORCE" != "1" ]]; then
@@ -124,9 +126,9 @@ for rel in "${FILES[@]}"; do
   fi
 
   if [[ -n "$LOCAL_PAYLOAD" ]]; then
-    cp "$LOCAL_PAYLOAD/$rel" "$dst"
+    cp "$LOCAL_PAYLOAD/$src" "$dst"
   else
-    curl -fsSL "$BASE_URL/$rel" -o "$dst"
+    curl -fsSL "$BASE_URL/$src" -o "$dst"
   fi
   echo "Installed: $dst"
 done
