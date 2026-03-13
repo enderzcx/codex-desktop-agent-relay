@@ -40,7 +40,6 @@ $files = @(
     "START_HERE.md",
     "sync-agent-status.ps1",
     "update-agent-status.ps1",
-    ".codex-agents/README.md",
     ".codex-agents/handoffs/HANDOFF_TEMPLATE.md",
     ".codex-agents/tasks/TASK_TEMPLATE.md"
 )

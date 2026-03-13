@@ -101,7 +101,6 @@ powershell -ExecutionPolicy Bypass -File .\cleanup-agent-worktrees.ps1
 - `await-agent-results.ps1`
 - `cleanup-agent-worktrees.ps1`
 - `START_HERE.md`
-- `.codex-agents/README.md`
 - `.codex-agents/tasks/TASK_TEMPLATE.md`
 - `.codex-agents/handoffs/HANDOFF_TEMPLATE.md`
 

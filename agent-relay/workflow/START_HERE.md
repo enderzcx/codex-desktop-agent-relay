@@ -42,6 +42,4 @@ powershell -ExecutionPolicy Bypass -File .\await-agent-results.ps1
 powershell -ExecutionPolicy Bypass -File .\cleanup-agent-worktrees.ps1
 ```
 
-Helpful files:
-
-- [README.md](/G:/ICO/.codex-agents/README.md)
+Status values used by workers are: `planned`, `in_progress`, `needs_review`, `blocked`, `done`.
