@@ -1,0 +1,55 @@
+# AGENTS.md
+
+## Project Overview
+
+- Describe what this repo does in 2-5 bullets.
+- List the major apps, services, or packages.
+- Note the main runtime architecture or integration boundaries.
+
+## Verified Commands
+
+```powershell
+<install command>
+<dev command>
+<test command>
+<build command>
+```
+
+Only keep commands here after they are verified in this repo.
+
+## Important Paths
+
+- `<path>`: what lives here
+- `<path>`: what lives here
+- `<path>`: what lives here
+
+## Repo Rules
+
+- Prefer the smallest correct change first.
+- Preserve existing style and patterns unless the task calls for a refactor.
+- Read nearby files before editing shared infrastructure.
+- Do not commit secrets, runtime databases, or generated local artifacts.
+- If a command or workflow is listed here, prefer it over guessing.
+
+## Testing And Verification
+
+- Run the narrowest relevant checks first.
+- For risky changes, run broader validation before closing.
+- If full verification is not possible locally, say exactly what was not run.
+
+## Constraints
+
+- `<constraint>`
+- `<constraint>`
+- `<constraint>`
+
+## AI Workflow
+
+- Use `AGENT.md` for local operator behavior.
+- Use `STATUS.md` for long-running task state.
+- Use `.ai-context/TASK.template.md` for large scoped work.
+- Use `.ai-context/PR-REVIEW.template.md` for formal review notes.
+
+## Skills
+
+List any repo-relevant skills here if your environment supports them.

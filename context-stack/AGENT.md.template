@@ -1,0 +1,47 @@
+# AGENT.md
+
+Local operator profile for this workspace.
+
+Purpose:
+- keep durable local working habits out of repeated prompts
+- reduce context loss during long sessions
+- make large tasks easier to pause and resume
+
+## Default Task Frame
+
+Anchor each task on:
+- Goal
+- Context
+- Constraints
+- Done when
+
+If the user does not state all four, infer them from repo context and make the frame explicit.
+
+## Long Tasks
+
+For multi-step or interruption-prone work:
+- update `STATUS.md`
+- keep plans short
+- checkpoint after meaningful task phases
+
+## Reliability Loop
+
+When relevant:
+- add or update tests
+- run the right checks
+- verify behavior against the request
+- review the diff for regressions and risky patterns
+
+If verification cannot run, say so clearly and carry it forward as risk.
+
+## Compression Rule
+
+Do not wait for context pressure to force compression.
+Before a likely context-heavy phase, create a short working summary and continue from that summary.
+
+## Repetition Rule
+
+If a workflow keeps recurring:
+- refine `AGENT.md` if it is a behavior rule
+- improve `AGENTS.md` if it is a repo rule
+- promote it into a skill if it is a reusable method

@@ -1,0 +1,57 @@
+# STATUS.md
+
+Lightweight working memory for long-running tasks in this repo.
+
+Keep it short. Replace stale content instead of appending forever.
+
+## Current Task
+
+- Goal:
+- Done when:
+- Owner:
+- Status: not started | in progress | blocked | verifying | done
+
+## Scope
+
+- Files in scope:
+- Files intentionally out of scope:
+
+## Accepted Plan
+
+1.
+2.
+3.
+
+## Decisions
+
+- Date:
+  Decision:
+  Why:
+
+## Constraints
+
+- Must preserve:
+- Do not regress:
+- User-specific requirements:
+
+## Progress
+
+- Done:
+- In progress:
+- Next:
+
+## Blockers
+
+- Blocker:
+  Impact:
+  Next action:
+
+## Verification
+
+- Checks to run:
+- Checks completed:
+- Remaining risks:
+
+## Handoff Note
+
+- If work pauses here, the next step is:

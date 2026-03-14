@@ -4,6 +4,11 @@
 
 It lets a **main thread** launch **child agents in Codex CLI windows** so work can run in parallel. The main thread can then read each child agent's **status**, **handoff**, and **result**, and decide whether to continue some threads or summarize everything for the user.
 
+This repo now bundles two layers:
+
+- `agent-relay`: worker orchestration, watcher, and controller reports
+- `context-stack`: `AGENTS.md`, `AGENT.md`, `STATUS.md`, and `.ai-context/` templates for project context and long-task memory
+
 What it does:
 
 - main thread delegates work to child agents
@@ -30,6 +35,27 @@ If you already cloned this repo locally:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\install.ps1 -ProjectRoot .
+```
+
+By default this installs the full stack into the target project:
+
+- relay workflow scripts
+- `AGENTS.md`
+- local `AGENT.md`
+- local `STATUS.md`
+- `.ai-context/TASK.template.md`
+- `.ai-context/PR-REVIEW.template.md`
+
+If you only want the workflow scripts:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\install.ps1 -ProjectRoot . -WorkflowOnly
+```
+
+If you only want the context layer:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\context-stack\install-context.ps1 -ProjectRoot .
 ```
 
 ## Quick Start
@@ -62,9 +88,10 @@ Available modes:
 - worker launcher scripts
 - main-thread sync and report scripts
 - low-token controller watcher script
+- project context templates
 - optional worktree cleanup
 - `.codex-agents/` shared state files
-- workflow docs and templates
+- `.ai-context/` task and review templates
 
 ## Use this when
 
