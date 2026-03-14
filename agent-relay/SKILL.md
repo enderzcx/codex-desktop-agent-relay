@@ -54,6 +54,20 @@ powershell -ExecutionPolicy Bypass -File .\start-agent-relay.ps1 -Goal "Replace 
 
 This prepares worker files, opens worker windows, and runs the watcher until the controller should wake up.
 
+Preset modes are available:
+
+- `general`
+- `ceo-review`
+- `eng-review`
+- `staff-debug`
+- `qa-bug-hunt`
+
+Example:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\start-agent-relay.ps1 -Mode eng-review -Goal "Review the architecture for this feature"
+```
+
 3. If you want to edit tasks before opening windows:
 
 ```powershell

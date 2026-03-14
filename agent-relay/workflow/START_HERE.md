@@ -15,6 +15,20 @@ This will:
 - run the low-token watcher
 - stop when a worker blocks, asks for review, or all workers finish
 
+Preset modes are available when you want specialized worker roles:
+
+- `general`
+- `ceo-review`
+- `eng-review`
+- `staff-debug`
+- `qa-bug-hunt`
+
+Example:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\start-agent-relay.ps1 -Mode qa-bug-hunt -Goal "Find the most likely release blockers in this flow"
+```
+
 2. If you want to prepare worker files first:
 
 ```powershell

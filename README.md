@@ -42,6 +42,20 @@ powershell -ExecutionPolicy Bypass -File .\start-agent-relay.ps1 -Goal "Replace 
 
 This prepares worker files, opens child agent CLI windows by default, and runs the low-token watcher until the controller should wake up.
 
+You can also start with a preset role stack:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\start-agent-relay.ps1 -Mode ceo-review -Goal "Challenge this product direction"
+```
+
+Available modes:
+
+- `general`
+- `ceo-review`
+- `eng-review`
+- `staff-debug`
+- `qa-bug-hunt`
+
 ## What gets installed
 
 - one-command starter script

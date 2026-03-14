@@ -23,6 +23,203 @@ if ($PSBoundParameters.ContainsKey("NoOpenWindows")) {
     $shouldOpenWindows = [bool]$OpenWindows
 }
 
+function Get-RoleProfile {
+    param([string]$Role)
+
+    switch ($Role) {
+        "implementer" {
+            return [pscustomobject]@{
+                Title = "Implement the main slice"
+                ResultLine = "Implementation status: replace with the current result."
+                Guidance = @(
+                    "- Focus on the narrow implementation slice assigned by the main agent.",
+                    "- Prefer minimal code changes and clear validation."
+                )
+                DoneWhen = @(
+                    "- The requested slice is implemented or clearly blocked.",
+                    "- The handoff names changed files and the smallest validation run."
+                )
+            }
+        }
+        "tester" {
+            return [pscustomobject]@{
+                Title = "Check validation and edge cases"
+                ResultLine = "Validation status: replace with the current result."
+                Guidance = @(
+                    "- Focus on edge cases, regression checks, and the smallest useful validation.",
+                    "- Flag missing coverage before proposing broad test rewrites."
+                )
+                DoneWhen = @(
+                    "- The handoff lists edge cases, checks run, and any uncovered risk.",
+                    "- The worker states whether the main path appears safe."
+                )
+            }
+        }
+        "reviewer" {
+            return [pscustomobject]@{
+                Title = "Review for bugs and regressions"
+                ResultLine = "Review status: replace with the current result."
+                Guidance = @(
+                    "- Review for bugs, regressions, and risky assumptions.",
+                    "- Return findings first with file references when possible."
+                )
+                DoneWhen = @(
+                    "- The handoff lists findings first or explicitly says no findings.",
+                    "- File references are included for each concrete issue."
+                )
+            }
+        }
+        "ceo" {
+            return [pscustomobject]@{
+                Title = "Challenge the direction"
+                ResultLine = "Strategic review status: replace with the current result."
+                Guidance = @(
+                    "- Focus on the real business or product outcome, not implementation details first.",
+                    "- Pressure-test whether the problem is worth solving now and what should be deprioritized."
+                )
+                DoneWhen = @(
+                    "- The handoff states the top strategic recommendation and the biggest unresolved question.",
+                    "- The handoff names what should not be done yet."
+                )
+            }
+        }
+        "product-manager" {
+            return [pscustomobject]@{
+                Title = "Clarify the product shape"
+                ResultLine = "Product framing status: replace with the current result."
+                Guidance = @(
+                    "- Focus on user problem, target flow, constraints, non-goals, and success criteria.",
+                    "- Turn broad requests into a sharper product brief with explicit tradeoffs."
+                )
+                DoneWhen = @(
+                    "- The handoff defines the user, the core job to be done, and the smallest coherent scope.",
+                    "- The handoff highlights ambiguity that the main agent must resolve."
+                )
+            }
+        }
+        "risk-reviewer" {
+            return [pscustomobject]@{
+                Title = "Stress-test assumptions"
+                ResultLine = "Risk review status: replace with the current result."
+                Guidance = @(
+                    "- Focus on hidden assumptions, adoption risk, operational risk, and incentive misalignment.",
+                    "- Return findings first and separate verified risks from speculation."
+                )
+                DoneWhen = @(
+                    "- The handoff lists the most dangerous assumption first.",
+                    "- The handoff includes mitigation ideas for the top risks."
+                )
+            }
+        }
+        "architect" {
+            return [pscustomobject]@{
+                Title = "Shape the architecture"
+                ResultLine = "Architecture status: replace with the current result."
+                Guidance = @(
+                    "- Focus on system boundaries, interface choices, failure isolation, and scalability tradeoffs.",
+                    "- Prefer a small number of concrete architecture options over broad brainstorming."
+                )
+                DoneWhen = @(
+                    "- The handoff recommends an architecture direction and explains why.",
+                    "- The handoff names the key boundary or dependency that could break the design."
+                )
+            }
+        }
+        "staff-engineer" {
+            return [pscustomobject]@{
+                Title = "Find the implementation path"
+                ResultLine = "Implementation path status: replace with the current result."
+                Guidance = @(
+                    "- Focus on pragmatic implementation sequence, migration risk, and technical tradeoffs.",
+                    "- Name the smallest path to a working first version."
+                )
+                DoneWhen = @(
+                    "- The handoff lays out a realistic implementation order.",
+                    "- The handoff highlights the hardest technical step and how to de-risk it."
+                )
+            }
+        }
+        "incident-commander" {
+            return [pscustomobject]@{
+                Title = "Stabilize the incident"
+                ResultLine = "Incident status: replace with the current result."
+                Guidance = @(
+                    "- Focus on blast radius, user impact, stop-the-bleeding actions, and decision points.",
+                    "- Prefer clear triage and containment steps over deep theory."
+                )
+                DoneWhen = @(
+                    "- The handoff states current impact, immediate containment, and next operational decision.",
+                    "- The handoff distinguishes active incident actions from later cleanup."
+                )
+            }
+        }
+        "staff-debugger" {
+            return [pscustomobject]@{
+                Title = "Hunt the root cause"
+                ResultLine = "Debugging status: replace with the current result."
+                Guidance = @(
+                    "- Focus on root cause, evidence, minimal repro, and the fastest path to confidence.",
+                    "- Prefer concrete hypotheses and elimination steps."
+                )
+                DoneWhen = @(
+                    "- The handoff states the most likely root cause and the evidence behind it.",
+                    "- The handoff names the next highest-signal check if the cause is still uncertain."
+                )
+            }
+        }
+        "qa-hunter" {
+            return [pscustomobject]@{
+                Title = "Hunt user-visible failures"
+                ResultLine = "QA hunt status: replace with the current result."
+                Guidance = @(
+                    "- Focus on user-visible bugs, weak flows, and obvious regressions before edge-case theory.",
+                    "- Prioritize issues by severity and ease of reproduction."
+                )
+                DoneWhen = @(
+                    "- The handoff lists the best bug candidates with repro notes.",
+                    "- The handoff separates likely bugs from lower-confidence suspicions."
+                )
+            }
+        }
+        "repro-engineer" {
+            return [pscustomobject]@{
+                Title = "Turn failures into repro steps"
+                ResultLine = "Repro status: replace with the current result."
+                Guidance = @(
+                    "- Focus on deterministic reproduction, logs, screenshots, and narrowing conditions.",
+                    "- Convert vague symptoms into crisp repro recipes."
+                )
+                DoneWhen = @(
+                    "- The handoff includes the clearest repro steps found.",
+                    "- The handoff notes what evidence is still missing."
+                )
+            }
+        }
+        "triage-reviewer" {
+            return [pscustomobject]@{
+                Title = "Rank and frame the bugs"
+                ResultLine = "Triage status: replace with the current result."
+                Guidance = @(
+                    "- Focus on severity, likely user impact, release risk, and what should be fixed first.",
+                    "- Return findings first and keep them actionable."
+                )
+                DoneWhen = @(
+                    "- The handoff ranks the top issues by priority.",
+                    "- The handoff states which issue should block release, if any."
+                )
+            }
+        }
+        default {
+            return [pscustomobject]@{
+                Title = "Complete assigned work"
+                ResultLine = "Replace with the current result."
+                Guidance = @("- Stay within the assigned scope and return a concise handoff.")
+                DoneWhen = @("- The handoff is complete and actionable for the main agent.")
+            }
+        }
+    }
+}
+
 function New-AgentTaskContent {
     param(
         [string]$TaskId,
@@ -38,66 +235,14 @@ function New-AgentTaskContent {
         [string]$ContextText
     )
 
-    $roleGuidance = switch ($Role) {
-        "implementer" {
-            @(
-                "- Focus on the narrow implementation slice assigned by the main agent.",
-                "- Prefer minimal code changes and clear validation."
-            )
-            break
-        }
-        "tester" {
-            @(
-                "- Focus on edge cases, regression checks, and the smallest useful validation.",
-                "- Flag missing coverage before proposing broad test rewrites."
-            )
-            break
-        }
-        "reviewer" {
-            @(
-                "- Review for bugs, regressions, and risky assumptions.",
-                "- Return findings first with file references when possible."
-            )
-            break
-        }
-        default {
-            @("- Stay within the assigned scope and return a concise handoff.")
-        }
-    }
+    $profile = Get-RoleProfile -Role $Role
 
     $constraints = @(
         "- Read relevant files before changing anything.",
         "- Stay within the assigned role.",
         "- Write updates to the matching status and handoff files.",
         "- Ask for cross-worker information through the main agent, not directly to another worker."
-    ) + $roleGuidance
-
-    $doneWhen = switch ($Role) {
-        "implementer" {
-            @(
-                "- The requested slice is implemented or clearly blocked.",
-                "- The handoff names changed files and the smallest validation run."
-            )
-            break
-        }
-        "tester" {
-            @(
-                "- The handoff lists edge cases, checks run, and any uncovered risk.",
-                "- The worker states whether the main path appears safe."
-            )
-            break
-        }
-        "reviewer" {
-            @(
-                "- The handoff lists findings first or explicitly says no findings.",
-                "- File references are included for each concrete issue."
-            )
-            break
-        }
-        default {
-            @("- The handoff is complete and actionable for the main agent.")
-        }
-    }
+    ) + $profile.Guidance
 
     $lines = @(
         "# Worker Task",
@@ -136,7 +281,7 @@ function New-AgentTaskContent {
         ""
     )
 
-    foreach ($item in $doneWhen) {
+    foreach ($item in $profile.DoneWhen) {
         $lines += $item
     }
 
@@ -146,12 +291,8 @@ function New-AgentTaskContent {
 function New-HandoffContent {
     param([string]$Role)
 
-    $resultLine = switch ($Role) {
-        "implementer" { "Implementation status: replace with the current result." ; break }
-        "tester" { "Validation status: replace with the current result." ; break }
-        "reviewer" { "Review status: replace with the current result." ; break }
-        default { "Replace with the current result." }
-    }
+    $profile = Get-RoleProfile -Role $Role
+    $resultLine = $profile.ResultLine
 
     return @"
 # Result
@@ -183,12 +324,7 @@ function Get-TaskDefinitions {
     $index = 1
     foreach ($role in $RequestedRoles) {
         $taskId = "task-{0:D3}-{1}" -f $index, $role
-        $title = switch ($role) {
-            "implementer" { "Implement the main slice" ; break }
-            "tester" { "Check validation and edge cases" ; break }
-            "reviewer" { "Review for bugs and regressions" ; break }
-            default { "Complete assigned work" }
-        }
+        $title = (Get-RoleProfile -Role $role).Title
 
         $definitions += [pscustomobject]@{
             TaskId = $taskId
